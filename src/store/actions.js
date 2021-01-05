@@ -58,14 +58,14 @@ import {
 	patchMailbox,
 } from '../service/MailboxService'
 import {
-	deleteMessage,
+	deleteMessages,
 	fetchEnvelope,
 	fetchEnvelopes,
 	fetchMessage,
 	setEnvelopeFlag,
 	syncEnvelopes,
 	fetchThread,
-	moveMessage,
+	moveMessages,
 } from '../service/MessageService'
 import { createAlias, deleteAlias } from '../service/AliasService'
 import logger from '../logger'
@@ -675,21 +675,17 @@ export default {
 		}
 		return message
 	},
-	async deleteMessage({ getters, commit }, { id }) {
-		commit('removeEnvelope', { id })
+	async deleteMessages({ getters, commit }, { ids }) {
 
 		try {
-			await deleteMessage(id)
-			commit('removeMessage', { id })
-			console.debug('message removed')
+			await deleteMessages(ids)
+			ids.forEach(id => {
+				commit('removeEnvelope', { id })
+				commit('removeMessage', { id })
+			})
+			console.debug('messages removed')
 		} catch (err) {
-			console.error('could not delete message', err)
-			const envelope = getters.getEnvelope(id)
-			if (envelope) {
-				commit('addEnvelope', { envelope })
-			} else {
-				logger.error('could not find envelope', { id })
-			}
+			console.error('could not delete messages', err)
 			throw err
 		}
 	},
@@ -710,9 +706,11 @@ export default {
 		commit('removeMailbox', { id: mailbox.databaseId })
 		commit('addMailbox', { account, mailbox: newMailbox })
 	},
-	async moveMessage({ commit }, { id, destMailboxId }) {
-		await moveMessage(id, destMailboxId)
-		commit('removeEnvelope', { id })
-		commit('removeMessage', { id })
+	async moveMessages({ commit }, { ids, destMailboxId }) {
+		await moveMessages(ids, destMailboxId)
+		ids.forEach(id => {
+			commit('removeEnvelope', { id })
+			commit('removeMessage', { id })
+		})
 	},
 }

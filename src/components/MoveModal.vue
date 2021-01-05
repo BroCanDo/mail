@@ -49,10 +49,17 @@ export default {
 					return
 				}
 
-				await Promise.all(envelopeIds.map((id) => this.$store.dispatch('moveMessage', {
-					id,
-					destMailboxId: this.destMailboxId,
-				})))
+				// Move messages per batch of 50 messages so as to not overload server or create timeouts
+				let start = 0
+				let batch = []
+				do {
+					batch = envelopeIds.slice(start, 50)
+					await this.$store.dispatch('moveMessages', {
+						ids: batch,
+						destMailboxId: this.destMailboxId,
+					})
+					start += 50
+				} while (batch.length === 50)
 
 				await this.$store.dispatch('syncEnvelopes', { mailboxId: this.destMailboxId })
 				this.$emit('move')

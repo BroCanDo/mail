@@ -262,8 +262,8 @@ export default {
 			// Delete
 			this.$emit('delete', this.envelope.databaseId)
 			try {
-				await this.$store.dispatch('deleteMessage', {
-					id: this.envelope.databaseId,
+				await this.$store.dispatch('deleteMessages', {
+					ids: [this.envelope.databaseId],
 				})
 			} catch (error) {
 				showError(await matchError(error, {
