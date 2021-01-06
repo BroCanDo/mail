@@ -53,6 +53,11 @@ export default {
 			return `+${this.participants.length - this.participantsToDisplay}`
 		},
 	},
+	watch: {
+		participants() {
+			this.updateParticipantsToDisplay()
+		},
+	},
 	created() {
 		window.addEventListener('resize', this.resizeDebounced)
 	},
@@ -61,11 +66,6 @@ export default {
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.resizeDebounced)
-	},
-	watch: {
-		participants() {
-			this.updateParticipantsToDisplay()
-		}
 	},
 	methods: {
 		updateParticipantsToDisplay() {
