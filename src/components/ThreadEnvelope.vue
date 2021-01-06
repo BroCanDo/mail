@@ -155,10 +155,13 @@
 			</div>
 		</div>
 		<Loading v-if="loading" />
-		<Message v-else-if="message"
-			:envelope="envelope"
-			:message="message"
-			:full-height="fullHeight" />
+		<template v-else-if="message">
+			<ThreadAvatarHeader class="recipients" :participants="recipients" />
+			<Message
+				:envelope="envelope"
+				:message="message"
+				:full-height="fullHeight" />
+		</template>
 		<Error v-else-if="error"
 			:error="error && error.message ? error.message : t('mail', 'Not found')"
 			:message="errorMessage"
@@ -187,6 +190,7 @@ import { matchError } from '../errors/match'
 import { showError } from '@nextcloud/dialogs'
 import NoTrashMailboxConfiguredError
 	from '../errors/NoTrashMailboxConfiguredError'
+import ThreadAvatarHeader from './ThreadAvatarHeader'
 
 export default {
 	name: 'ThreadEnvelope',
@@ -202,6 +206,7 @@ export default {
 		Modal,
 		Avatar,
 		MoveModal,
+		ThreadAvatarHeader,
 	},
 	props: {
 		envelope: {
@@ -315,6 +320,9 @@ export default {
 					messageId: this.envelope.databaseId,
 				},
 			}
+		},
+		recipients() {
+			return this.envelope.to.concat(this.envelope.cc)
 		},
 	},
 	watch: {
@@ -520,6 +528,10 @@ export default {
 	}
 	.left:not(.seen) {
 		font-weight: bold;
+	}
+	.recipients {
+		margin-left: 48px;
+		margin-right: 38px;
 	}
 
 </style>

@@ -55,6 +55,7 @@ import MessageAttachments from './MessageAttachments'
 import MessageEncryptedBody from './MessageEncryptedBody'
 import MessageHTMLBody from './MessageHTMLBody'
 import MessagePlainTextBody from './MessagePlainTextBody'
+import ThreadAvatarHeader from './ThreadAvatarHeader'
 
 export default {
 	name: 'Message',
@@ -67,6 +68,7 @@ export default {
 		MessageHTMLBody,
 		MessagePlainTextBody,
 		Popover,
+		ThreadAvatarHeader,
 	},
 	props: {
 		envelope: {
@@ -94,6 +96,9 @@ export default {
 		},
 		isEncrypted() {
 			return isPgpgMessage(this.message.hasHtmlBody ? html(this.message.body) : plain(this.message.body))
+		},
+		receivers() {
+			return this.envelope.to.concat(this.envelope.cc)
 		},
 	},
 }
