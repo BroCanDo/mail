@@ -32,8 +32,10 @@
 				:multiple="true"
 				:placeholder="t('mail', 'Contact or email address …')"
 				:clear-on-select="false"
+				:close-on-select="false"
 				:show-no-options="false"
 				:preserve-search="true"
+				:hide-selected="true"
 				@keyup="onInputChanged"
 				@tag="onNewToAddr"
 				@search-change="onAutocomplete" />
@@ -888,8 +890,14 @@ export default {
 }
 ::v-deep .multiselect .multiselect__tags {
 	border: none !important;
+	.multiselect__tags-wrap {
+		z-index: 2500;
+		background-color: var(--color-main-background);
+		height: 33px;
+	}
 }
 .submit-message.send.primary.icon-confirm-white {
 	color: var(--color-main-background);
 }
+
 </style>
