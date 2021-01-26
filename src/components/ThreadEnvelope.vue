@@ -358,7 +358,11 @@ export default {
 			this.$store.dispatch('toggleEnvelopeJunk', this.envelope)
 		},
 		async onDelete() {
+
+			// emit event for navigation (this doesn't work atm)
 			this.$emit('delete', this.envelope.databaseId)
+
+			// effectively delete message
 			try {
 				await this.$store.dispatch('deleteMessage', {
 					id: this.envelope.databaseId,

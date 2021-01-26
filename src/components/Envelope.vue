@@ -283,8 +283,10 @@ export default {
 			// Remove from selection first
 			this.setSelected(false)
 
-			// Delete
+			// Emit event for navigation
 			this.$emit('delete')
+
+			// Effectively delete message
 			try {
 				await this.$store.dispatch('deleteMessage', {
 					id: this.data.databaseId,
