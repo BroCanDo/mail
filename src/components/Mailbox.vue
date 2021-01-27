@@ -266,7 +266,6 @@ export default {
 			try {
 				const envelopes = await this.$store.dispatch('fetchNextEnvelopePage', {
 					mailboxId: this.mailbox.databaseId,
-					envelopes: this.envelopes,
 					query: this.searchQuery,
 				})
 				if (envelopes.length === 0) {
@@ -401,7 +400,15 @@ export default {
 				logger.debug("finished sync'ing mailbox")
 			}
 		},
+		// onDelete(id): Load more message and navigate to other message if needed
+		// id: The id of the message being delete
 		onDelete(id) {
+			// Get a new message
+			this.$store.dispatch('fetchNextEnvelopes', {
+				mailboxId: this.mailbox.databaseId,
+				query: this.searchQuery,
+				quantity: 1
+			})
 			const idx = findIndex(propEq('databaseId', id), this.envelopes)
 			if (idx === -1) {
 				logger.debug('envelope to delete does not exist in envelope list')
