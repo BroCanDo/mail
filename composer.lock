@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "796eeaabd84d1ef5261b1668295dd3dc",
+    "content-hash": "51ecdffe1792a1c384f726352d6a46ae",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1254,6 +1254,36 @@
                 "BSD-2-Clause"
             ],
             "description": "Provides interfaces for sending e-mail messages and parsing e-mail addresses."
+        },
+        {
+            "name": "pear-pear.horde.org/Horde_ManageSieve",
+            "version": "1.0.2",
+            "dist": {
+                "type": "file",
+                "url": "https://pear.horde.org/get/Horde_ManageSieve-1.0.2.tgz"
+            },
+            "require": {
+                "pear-pear.horde.org/horde_exception": "<3.0.0.0",
+                "pear-pear.horde.org/horde_socket_client": "<3.0.0.0",
+                "pear-pear.horde.org/horde_util": "<3.0.0.0",
+                "php": ">=5.4.0.0"
+            },
+            "replace": {
+                "pear-horde/horde_managesieve": "== 1.0.2.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "BSD"
+            ],
+            "description": "This library implements the ManageSieve protocol (RFC 5804)."
         },
         {
             "name": "pear-pear.horde.org/Horde_Mime",
