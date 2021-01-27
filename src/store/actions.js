@@ -75,9 +75,7 @@ import { matchError } from '../errors/match'
 import SyncIncompleteError from '../errors/SyncIncompleteError'
 import MailboxLockedError from '../errors/MailboxLockedError'
 import { wait } from '../util/wait'
-import { UNIFIED_INBOX_ID } from './constants'
-
-const PAGE_SIZE = 20
+import { UNIFIED_INBOX_ID, PAGE_SIZE } from './constants'
 
 const sliceToPage = slice(0, PAGE_SIZE)
 
@@ -315,10 +313,15 @@ export default {
 			)
 		)(mailboxId, query, undefined, PAGE_SIZE)
 	},
-	fetchNextEnvelopePage({ commit, getters, dispatch }, { mailboxId, query }) {
-		this.fetchNextEnvelopes(mailboxId, query, PAGE_SIZE)
+	async fetchNextEnvelopePage({ commit, getters, dispatch }, { mailboxId, query }) {
+		const envelopes = await dispatch('fetchNextEnvelopes', {
+			mailboxId,
+			query,
+			quantity: PAGE_SIZE
+		})
+		return envelopes
 	},
-	fetchNextEnvelopes({ commit, getters, dispatch }, { mailboxId, query, quantity, rec = true }) {
+	async fetchNextEnvelopes({ commit, getters, dispatch }, { mailboxId, query, quantity, rec = true }) {
 		const mailbox = getters.getMailbox(mailboxId)
 
 		if (mailbox.isUnified) {
