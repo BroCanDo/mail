@@ -120,7 +120,7 @@
 			<div id="list-refreshing"
 				key="loading"
 				class="icon-loading-small"
-				:class="{refreshing: refreshing}" />
+				:class="{refreshing: refreshing || deleting}" />
 			<Envelope
 				v-for="(env, index) in envelopes"
 				:key="env.databaseId"
@@ -204,6 +204,7 @@ export default {
 			selection: [],
 			showMoveModal: false,
 			lastToggledIndex: undefined,
+			deleting: false, // True, when we are deleting messages
 		}
 	},
 	computed: {
@@ -296,6 +297,7 @@ export default {
 			})
 
 			logger.info('deleting messages')
+			this.deleting = true
 			this.unselectAll()
 
 			try {
@@ -303,7 +305,7 @@ export default {
 				let start = 0
 				let batch = []
 				do {
-					batch = ids.slice(start, 50)
+					batch = ids.slice(start, start + 50)
 					await this.$store.dispatch('deleteMessages', { ids: batch })
 					start += 50
 				} while (batch.length === 50)
@@ -318,6 +320,8 @@ export default {
 					},
 				}))
 			}
+
+			this.deleting = false
 		},
 		setEnvelopeSelected(envelope, selected) {
 			const alreadySelected = this.selection.includes(envelope.databaseId)
