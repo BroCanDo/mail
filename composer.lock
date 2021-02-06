@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "796eeaabd84d1ef5261b1668295dd3dc",
+    "content-hash": "bdc53100b8af288768461f35b2ccc4a6",
     "packages": [
         {
             "name": "amphp/amp",
@@ -689,27 +689,29 @@
         },
         {
             "name": "coenjacobs/mozart",
-            "version": "0.6.0-beta-2",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coenjacobs/mozart.git",
-                "reference": "a0207484516bd79564f4223a0f3056a7e1e0b34a"
+                "reference": "dbcdeb992d20d9c8914eef090f9a0d684bb1102c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coenjacobs/mozart/zipball/a0207484516bd79564f4223a0f3056a7e1e0b34a",
-                "reference": "a0207484516bd79564f4223a0f3056a7e1e0b34a",
+                "url": "https://api.github.com/repos/coenjacobs/mozart/zipball/dbcdeb992d20d9c8914eef090f9a0d684bb1102c",
+                "reference": "dbcdeb992d20d9c8914eef090f9a0d684bb1102c",
                 "shasum": ""
             },
             "require": {
                 "league/flysystem": "^1.0",
-                "php": "^7.2",
+                "php": "^7.3|^8.0",
                 "symfony/console": "^4|^5",
                 "symfony/finder": "^4|^5"
             },
             "require-dev": {
+                "mheap/phpunit-github-actions-printer": "^1.4",
                 "phpunit/phpunit": "^8.5",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.4"
             },
             "bin": [
                 "bin/mozart"
@@ -737,7 +739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-05-23T13:12:01+00:00"
+            "time": "2021-02-02T21:37:03+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -2058,16 +2060,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.2.2",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d62ec79478b55036f65e2602e282822b8eaaff0a"
+                "reference": "89d4b176d12a2946a1ae4e34906a025b7b6b135a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d62ec79478b55036f65e2602e282822b8eaaff0a",
-                "reference": "d62ec79478b55036f65e2602e282822b8eaaff0a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/89d4b176d12a2946a1ae4e34906a025b7b6b135a",
+                "reference": "89d4b176d12a2946a1ae4e34906a025b7b6b135a",
                 "shasum": ""
             },
             "require": {
@@ -2148,20 +2150,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-27T10:15:41+00:00"
+            "time": "2021-01-28T22:06:19+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v5.2.2",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "196f45723b5e618bf0e23b97e96d11652696ea9e"
+                "reference": "4adc8d172d602008c204c2e16956f99257248e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/196f45723b5e618bf0e23b97e96d11652696ea9e",
-                "reference": "196f45723b5e618bf0e23b97e96d11652696ea9e",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/4adc8d172d602008c204c2e16956f99257248e03",
+                "reference": "4adc8d172d602008c204c2e16956f99257248e03",
                 "shasum": ""
             },
             "require": {
@@ -2206,7 +2208,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-27T10:01:46+00:00"
+            "time": "2021-01-28T22:06:19+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2754,7 +2756,7 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.2.2",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
@@ -6906,7 +6908,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "coenjacobs/mozart": 10,
         "kwi/urllinker": 20,
         "pear-pear.horde.org/horde_date": 0,
         "pear-pear.horde.org/horde_exception": 0,
