@@ -137,6 +137,15 @@ export default {
 		},
 	},
 	watch: {
+		// Reloads the envelope list when user clicks on the folder it's currently in
+		$route(to) {
+			if (to.params.threadId === undefined) {
+				this.loadEnvelopes()
+					.then(() => {
+						this.sync(false)
+					})
+			}
+		},
 		account() {
 			this.loadEnvelopes()
 		},
