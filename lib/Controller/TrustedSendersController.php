@@ -36,6 +36,7 @@ class TrustedSendersController extends Controller {
 
 	/** @var string|null */
 	private $uid;
+	private $type;
 
 	/** @var ITrustedSenderService */
 	private $trustedSenderService;
@@ -60,7 +61,8 @@ class TrustedSendersController extends Controller {
 	public function setTrusted(string $email): JsonResponse {
 		$this->trustedSenderService->trust(
 			$this->uid,
-			$email
+			$email,
+			$this->type
 		);
 
 		return JsonResponse::success(null, Http::STATUS_CREATED);
@@ -78,6 +80,7 @@ class TrustedSendersController extends Controller {
 		$this->trustedSenderService->trust(
 			$this->uid,
 			$email,
+			$this->type,
 			false
 		);
 

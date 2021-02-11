@@ -282,9 +282,15 @@ class MessagesController extends Controller {
 		if ($email === null) {
 			return false;
 		}
+		$type = $first->getEmail();
+		if($type === null) {
+			return false;
+		}
 		return $this->trustedSenderService->isTrusted(
 			$this->currentUserId,
-			$email
+			$email,
+			$type
+
 		);
 	}
 

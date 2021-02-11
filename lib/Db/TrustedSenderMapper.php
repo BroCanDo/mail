@@ -33,14 +33,15 @@ class TrustedSenderMapper extends QBMapper {
 		parent::__construct($db, 'mail_trusted_senders');
 	}
 
-	public function exists(string $uid, string $email): bool {
+	public function exists(string $uid, string $email, string $type): bool {
 		$qb = $this->db->getQueryBuilder();
 
 		$select = $qb->select('*')
 			->from($this->getTableName())
 			->where(
 				$qb->expr()->eq('user_id', $qb->createNamedParameter($uid)),
-				$qb->expr()->eq('email', $qb->createNamedParameter($email))
+				$qb->expr()->eq('email', $qb->createNamedParameter($email)),
+				$qb->expr()->eq('type', $qb->createNamedParameter($type))
 			);
 
 		/** @var TrustedSender[] $rows */
@@ -49,25 +50,27 @@ class TrustedSenderMapper extends QBMapper {
 		return !empty($rows);
 	}
 
-	public function create(string $uid, string $email): void {
+	public function create(string $uid, string $email, string $type): void {
 		$qb = $this->db->getQueryBuilder();
 
 		$insert = $qb->insert($this->getTableName())
 			->values([
 				'user_id' => $qb->createNamedParameter($uid),
 				'email' => $qb->createNamedParameter($email),
+				'type' => $qb->createNamedParameter($type),
 			]);
 
 		$insert->execute();
 	}
 
-	public function remove(string $uid, string $email): void {
+	public function remove(string $uid, string $email, string $type): void {
 		$qb = $this->db->getQueryBuilder();
 
 		$delete = $qb->delete($this->getTableName())
 			->where(
 				$qb->expr()->eq('user_id', $qb->createNamedParameter($uid)),
-				$qb->expr()->eq('email', $qb->createNamedParameter($email))
+				$qb->expr()->eq('email', $qb->createNamedParameter($email)),
+				$qb->expr()->eq('type', $qb->createNamedParameter($type))
 			);
 
 		$delete->execute();

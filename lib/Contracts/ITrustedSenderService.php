@@ -28,9 +28,9 @@ namespace OCA\Mail\Contracts;
 use OCA\Mail\Db\TrustedSender;
 
 interface ITrustedSenderService {
-	public function isTrusted(string $uid, string $email): bool;
+	public function isTrusted(string $uid, string $email, string $type): bool;
 
-	public function trust(string $uid, string $email, ?bool $trust = true);
+	public function trust(string $uid, string $email, string $type, ?bool $trust = true);
 
 	/**
 	 * @param string $uid
